@@ -19,7 +19,7 @@ app.use('/auth', Auth);
 // Start the app only after DB connection
 async function startServer() {
     try {
-        // await connect(); // Wait for DB connection
+        await connect(); // Wait for DB connection
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });

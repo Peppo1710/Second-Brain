@@ -1,12 +1,16 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../../db.js');
-const { userRegisterSchema, userLoginSchema } = require('../../Models/model.js');
+const crypto = require('crypto');
+const {User,VerificationToken} = require('../../Models/userDbSchema.js');
+const {userRegisterSchema,userLoginSchema} = require('../../Models/model.js');
+const {sendVerificationEmail,sendLoginAlertEmail} = require('./utils/sendVerMail.js')
 
 const userAuth = express.Router();
 
-const JWT_SECRET = "secret_key";
+require('dotenv').config();
+
+const JWT_SECRET = process.env.JWT_SECRET || "";
 
 userAuth.post('/register', async (req, res) => {
   try {
@@ -25,11 +29,30 @@ userAuth.post('/register', async (req, res) => {
     const newUser = new User({
       ...data,
       password: hashedPassword,
+      isVerfied:false,
     });
 
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully" });
+    const token = crypto.randomBytes(32).toString('hex');
+    const createdAt = new Date(); // current date and time
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    // Save token in VerificationToken collection
+    const verificationToken = new VerificationToken({
+      userId: newUser._id,
+      token,
+      createdAt,
+      expiresAt,
+      used: false,
+    });
+    
+    await verificationToken.save();
+
+    // Send verification email
+    await sendVerificationEmail(newUser.username, token);
+
+    res.status(201).json({ message: "User registered successfully , Check mail to verify account " });
 
   } catch (err) {
     if (err.name === 'ZodError') {
@@ -40,6 +63,80 @@ userAuth.post('/register', async (req, res) => {
   }
 });
 
+userAuth.get('/verify', async (req, res) => {
+  try {
+    const { token } = req.query;
+    if (!token) return res.status(400).send('Token required');
+
+    const tokenDoc = await VerificationToken.findOne({ token, used: false });
+    if (!tokenDoc) return res.status(400).send('Invalid or expired token');
+
+    if (tokenDoc.expiresAt < new Date()) return res.status(400).send('Token expired');
+
+    // Mark token as used
+    tokenDoc.used = true;
+    await tokenDoc.save();
+
+    // Verify user
+    const user = await User.findById(tokenDoc.userId);
+    if (!user) return res.status(404).send('User not found');
+
+    user.isVerified = true;
+    await user.save();
+
+    res.send('Email verified successfully!');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+userAuth.post('/resend-mail', async (req, res) => {
+  try {
+    const { username } = req.body;
+    if (!username) return res.status(400).send('Email required');
+
+    const user = await User.findOne({ username });
+    if (!user) return res.status(404).send('User not found');
+    if (user.isVerified) return res.status(400).send('User already verified');
+
+    let tokenDoc = await VerificationToken.findOne({
+      userId: user._id,
+      used: false,
+    }).sort({ createdAt: -1 });
+
+    const now = new Date();
+
+    if (!tokenDoc || tokenDoc.expiresAt < now) {
+      // Generate new token if none exists or expired
+      const newToken = crypto.randomBytes(32).toString('hex');
+      const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+      // Mark old token as used if exists
+      if (tokenDoc) {
+        tokenDoc.used = true;
+        await tokenDoc.save();
+      }
+
+      tokenDoc = new VerificationToken({
+        userId: user._id,
+        token: newToken,
+        expiresAt,
+      });
+      await tokenDoc.save();
+    }
+
+    // Send email with valid token
+    await sendVerificationEmail(email, tokenDoc.token);
+
+    res.send('Verification email resent.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
 userAuth.post('/login', async (req, res) => {
   try {
     const { username, password } = userLoginSchema.parse(req.body);
@@ -49,10 +146,37 @@ userAuth.post('/login', async (req, res) => {
       return res.status(404).json({ error: "Invalid username or password" });
     }
 
+    // Check cooldown lock
+    if (user.lockUntil && user.lockUntil > new Date()) {
+      return res.status(403).json({ 
+        error: `Account locked. Try again after ${user.lockUntil.toLocaleTimeString()}` 
+      });
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      // Increase login attempts
+      user.loginAttempts = (user.loginAttempts || 0) + 1;
+
+      if (user.loginAttempts >= 3) {
+        // Lock for 10 minutes
+        user.lockUntil = new Date(Date.now() + 10 * 60 * 1000);
+
+        // Send alert email (make sure sendLoginAlertEmail is imported)
+        await sendLoginAlertEmail(user.username);
+
+        await user.save();
+        return res.status(403).json({ error: "Too many failed attempts. Account locked for 10 minutes." });
+      }
+
+      await user.save();
       return res.status(401).json({ error: "Invalid username or password" });
     }
+
+    // Successful login: reset attempts and lock
+    user.loginAttempts = 0;
+    user.lockUntil = null;
+    await user.save();
 
     // Generate token
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
@@ -63,9 +187,11 @@ userAuth.post('/login', async (req, res) => {
     if (err.name === 'ZodError') {
       return res.status(400).json({ error: err.errors });
     }
+    console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 function authMiddleware(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1];
