@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const {User,VerificationToken} = require('../../Models/userDbSchema.js');
 const {userRegisterSchema,userLoginSchema} = require('../../Models/model.js');
 const {sendVerificationEmail,sendLoginAlertEmail} = require('./utils/sendVerMail.js')
+const authMiddleware = require('../../middleware/userMiddleware.js')
 
 const userAuth = express.Router();
 
@@ -179,9 +180,14 @@ userAuth.post('/login', async (req, res) => {
     await user.save();
 
     // Generate token
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { id: user._id, username: user.username },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
 
-    res.json({ message: "Login successful", token });
+    res.json({ message: "Login successful", token, username: user.username });
+    // Frontend will take this and store this in the localstorage acting as a session. 
 
   } catch (err) {
     if (err.name === 'ZodError') {
@@ -193,18 +199,18 @@ userAuth.post('/login', async (req, res) => {
 });
 
 
-function authMiddleware(req, res, next) {
-  const token = req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(401).json({ error: "Unauthorized" });
+// function authMiddleware(req, res, next) {
+//   const token = req.headers.authorization?.split(" ")[1];
+//   if (!token) return res.status(401).json({ error: "Unauthorized" });
 
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.userId = decoded.id;
-    next();
-  } catch (err) {
-    return res.status(403).json({ error: "Invalid token" });
-  }
-}
+//   try {
+//     const decoded = jwt.verify(token, JWT_SECRET);
+//     req.userId = decoded.id;
+//     next();
+//   } catch (err) {
+//     return res.status(403).json({ error: "Invalid token" });
+//   }
+// }
 
 userAuth.get('/me', authMiddleware, async (req, res) => {
   try {
