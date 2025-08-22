@@ -1,9 +1,10 @@
 // routes/notebooks.js
 const express = require('express');
-const router = express.Router();
-const Notebook = require('../../Models/notebookSchema');
-const { requireAuth } = require('../middlewares/auth');
+const notebookRouter = express.Router();
+const {Notebook} = require('../../Models/notebookSchema');
+// const { requireAuth } = require('../middlewares/auth');
 const mongoose = require('mongoose');
+const authMiddleware = require('../../middleware/userMiddleware')
 
 // Helpers
 function clampOrder(arr) {
@@ -13,12 +14,14 @@ function clampOrder(arr) {
 }
 
 // Create notebook
-notebookRouter.post('/', requireAuth, async (req, res) => {
+notebookRouter.post('/create', authMiddleware, async (req, res) => {
   try {
     const { title, description } = req.body;
     if (!title) return res.status(400).json({ error: 'title required' });
+    console.log();
+    
 
-    const nb = new Notebook({ userId: req.user._id, title, description });
+    const nb = new Notebook({ userId: req.user.id, title, description });
     await nb.save();
     res.status(201).json(nb);
   } catch (err) {
@@ -28,17 +31,17 @@ notebookRouter.post('/', requireAuth, async (req, res) => {
 });
 
 // Get all notebooks for user
-notebookRouter.get('/', requireAuth, async (req, res) => {
+notebookRouter.get('/',authMiddleware, async (req, res) => {
   try {
-    const notebooks = await Notebook.find({ userId: req.user._id }).sort({ updatedAt: -1 });
+    const notebooks = await Notebook.find({ userId: req.user.id }).sort({ updatedAt: -1 });
     res.json(notebooks);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
 });
 
-// Get single notebook (with divs)
-notebookRouter.get('/:id', requireAuth, async (req, res) => {
+// Get single notebook (with divs) --- note required for now 
+notebookRouter.get('/:id',authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.isValidObjectId(id)) return res.status(400).json({ error: 'Invalid id' });
@@ -52,12 +55,13 @@ notebookRouter.get('/:id', requireAuth, async (req, res) => {
 });
 
 // Update notebook meta
-notebookRouter.put('/:id', requireAuth, async (req, res) => {
+/*Here we can face issue while having intergration , since the way we are sending query param is different so check if faced any issue */
+notebookRouter.put('/:id',authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description } = req.body;
     const nb = await Notebook.findOneAndUpdate(
-      { _id: id, userId: req.user._id },
+      { _id: id, userId: req.user.id },
       { $set: { title, description, updatedAt: new Date() } },
       { new: true }
     );
@@ -69,9 +73,9 @@ notebookRouter.put('/:id', requireAuth, async (req, res) => {
 });
 
 // Delete notebook
-notebookRouter.delete('/:id', requireAuth, async (req, res) => {
+notebookRouter.delete('/:id',authMiddleware, async (req, res) => {
   try {
-    const nb = await Notebook.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
+    const nb = await Notebook.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
     if (!nb) return res.status(404).json({ error: 'Notebook not found' });
     res.json({ message: 'Deleted' });
   } catch (err) {
@@ -152,4 +156,4 @@ notebookRouter.delete('/:id', requireAuth, async (req, res) => {
 //   }
 // });
 
-module.exports = router;
+module.exports = notebookRouter;

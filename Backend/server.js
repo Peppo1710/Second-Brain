@@ -1,6 +1,6 @@
 const express = require('express');
 const connect = require('./db.js'); // 
-const Auth = require('./Routes/Auth/index')
+const mainRouting = require('./Routes/index.js')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 // Use the router
-app.use('/auth', Auth);
+app.use('/api', mainRouting);
 
 // Start the app only after DB connection
 async function startServer() {
