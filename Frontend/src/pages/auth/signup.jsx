@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Signup(){
+export default function Signup({ onSignup }){
   const navigate = useNavigate()
   const [form, setForm] = useState({ username:'', firstname:'', lastname:'', age:'', phone:'', password:'' })
   const [error, setError] = useState('')
@@ -18,6 +18,13 @@ export default function Signup(){
     }
     setError('')
     // Placeholder signup logic
+    const userData = {
+      id: 1,
+      name: `${form.firstname} ${form.lastname}`,
+      email: `${form.username}@example.com`,
+      avatar: null
+    }
+    onSignup(userData)
     navigate('/verify')
   }
 

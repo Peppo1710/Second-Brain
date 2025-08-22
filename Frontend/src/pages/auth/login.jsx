@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login(){
+export default function Login({ onLogin }){
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -10,6 +10,13 @@ export default function Login(){
     e.preventDefault()
     // Placeholder login logic
     if (username && password){
+      const userData = {
+        id: 1,
+        name: username,
+        email: `${username}@example.com`,
+        avatar: null
+      }
+      onLogin(userData)
       navigate('/home')
     }
   }
