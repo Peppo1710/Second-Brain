@@ -89,10 +89,10 @@ export default function Navbar({ user, onLogout }) {
 
   const NavLinks = () => (
     <nav className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
-      <Link to="/explore" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Explore</Link>
-      <Link to="/community" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Community</Link>
-      <Link to="/about" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">About</Link>
-      <Link to="/contact" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Contact</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Explore</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Community</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">About</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Contact</Link>
     </nav>
   )
 
@@ -102,8 +102,8 @@ export default function Navbar({ user, onLogout }) {
         <div className="flex h-16 items-center justify-between">
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gray-900 flex items-center justify-center shadow-sm">
-              <span className="text-white text-[11px] font-bold tracking-wider">SB</span>
+            <div className="h-8 w-8 rounded-lg  flex items-center justify-center ">
+              <img src="sb_logo.png" alt="logo" className='h-8 w-8' />
             </div>
             <span className="text-base md:text-lg font-semibold tracking-tight">SecondBrain</span>
           </Link>
@@ -122,7 +122,7 @@ export default function Navbar({ user, onLogout }) {
                 <Link to="/login" className="text-gray-700 hover:text-gray-900">Login</Link>
                 <Link
                   to="/signup"
-                  className="rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black/90 shadow-sm"
+                  className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black/90 shadow-sm"
                 >
                   Sign Up
                 </Link>

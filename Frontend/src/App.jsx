@@ -16,6 +16,7 @@ import Contact from './pages/Contact.jsx'
 import Account from './pages/Account.jsx'
 import Plan from './pages/Plan.jsx'
 import Navbar from './components/Navbar.jsx'
+import UnderDevelopment from './utils/UnderDevelopment.jsx'
 import { div } from 'framer-motion/client'
 
 function Layout({ children, user, onLogout }) {
@@ -53,6 +54,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout user={user} onLogout={handleLogout}><LandingPage /></Layout>} />
+        <Route path="/underdev" element={<Layout user={user} onLogout={handleLogout}><UnderDevelopment /></Layout>} />
         <Route path="/home" element={<Layout user={user} onLogout={handleLogout}><Home /></Layout>} />
         <Route path="/chat" element={<Layout user={user} onLogout={handleLogout}><Chat /></Layout>} />
         <Route path="/notebooks" element={<Layout user={user} onLogout={handleLogout}><Notebooks /></Layout>} />

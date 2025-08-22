@@ -18,7 +18,7 @@ export default function LandingPage() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+      <section className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             {/* Left Content */}
@@ -30,11 +30,9 @@ export default function LandingPage() {
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight mb-6">
                 Second Brain
-                <span className="block text-blue-600">Write</span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Where thoughts find their home, ideas connect like constellations, and knowledge flows like a gentle stream. 
-                Transform your scattered notes into a symphony of organized wisdom.
+                Organize your thoughts, connect your ideas, and unlock your knowledge.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-16">
                 <motion.button 
@@ -42,46 +40,22 @@ export default function LandingPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Start Free
+                  Get Started
                 </motion.button>
                 <motion.button 
                   className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Learn More
+                  Explore
                 </motion.button>
               </div>
             </motion.div>
 
             {/* Right Image */}
-            <motion.div 
-              className="flex-1 flex justify-center lg:justify-end"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <div className="relative w-80 h-80 lg:w-96 lg:h-96">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl shadow-2xl">
-                  <div className="absolute inset-4 bg-white rounded-2xl shadow-lg p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex space-x-2">
-                        <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                      </div>
-                      <div className="text-sm font-medium text-gray-600">SecondBrain</div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="h-2 bg-gray-200 rounded-full"></div>
-                      <div className="h-2 bg-gray-200 rounded-full w-3/4"></div>
-                      <div className="h-2 bg-blue-200 rounded-full w-1/2"></div>
-                      <div className="h-2 bg-gray-200 rounded-full w-4/5"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <div className="flex-1 flex justify-center lg:justify-end">
+              <img src="/heroheader.svg" alt="Second Brain Hero" className="max-w-full h-auto" />
+            </div>
           </div>
         </div>
       </section>
