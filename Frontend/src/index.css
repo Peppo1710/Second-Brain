@@ -1,5 +1,51 @@
 @import "tailwindcss";
 
+/* Custom font - Andada Pro */
+@font-face {
+  font-family: 'AndadaPro';
+  src: url('/fonts/andada_pro/otf/AndadaPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AndadaPro';
+  src: url('/fonts/andada_pro/otf/AndadaPro-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AndadaPro';
+  src: url('/fonts/andada_pro/otf/AndadaPro-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AndadaPro';
+  src: url('/fonts/andada_pro/otf/AndadaPro-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AndadaPro';
+  src: url('/fonts/andada_pro/otf/AndadaPro-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Set AndadaPro as default font */
+* {
+  font-family: 'AndadaPro', serif;
+}
+
 /* Custom animations for hero section */
 @keyframes blob {
   0% {
