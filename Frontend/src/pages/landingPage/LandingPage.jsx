@@ -18,7 +18,7 @@ export default function LandingPage() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+      <section className="relative overflow-hidden py-12 lg:py-20 gradient-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             {/* Left Content */}
@@ -28,23 +28,25 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight mb-6" style={{ fontFamily: 'AndadaPro, serif' }}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: 'AndadaPro, serif', color: '#001918' }}>
                 Second Brain
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed" style={{ color: '#001918' }}>
                 Organize your thoughts, connect your ideas, and unlock your knowledge.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-16">
                 <motion.button 
-                  className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-teal hover:shadow-xl transform hover:-translate-y-1"
+                  style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)', color: 'white' }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Get Started
                 </motion.button>
                 <motion.button 
-                  className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
+                  className="border-2 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-teal"
+                  style={{ borderColor: '#01322F', color: '#01322F', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 1)' }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Explore
@@ -54,14 +56,14 @@ export default function LandingPage() {
 
             {/* Right Image */}
             <div className="flex-1 flex justify-center lg:justify-end">
-              <img src="/heroheader.svg" alt="Second Brain Hero" className="max-w-full h-auto" />
+              <img src="/brain organ-cuate.svg" alt="Second Brain Hero" className="max-w-full h-auto" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Problem Statement */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-12"
@@ -70,15 +72,15 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium text-gray-600">
+            <div className="mx-auto inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium shadow-amber" style={{ borderColor: '#F59E0B', backgroundColor: 'rgba(245, 158, 11, 0.1)', color: '#F59E0B' }}>
               <span>Problem</span>
             </div>
-            <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+            <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight" style={{ color: '#001918' }}>
               Your ideas are scattered. Your notes are lost.
             </h2>
           </motion.div>
 
-          {/* Monochrome problem cards */}
+          {/* Beautiful problem cards - Fixed alignment */}
           <motion.div 
             className="grid gap-6 md:grid-cols-3"
             variants={staggerContainer}
@@ -91,7 +93,7 @@ export default function LandingPage() {
                 title: "Too Many Apps",
                 description: "Switching between too many apps just to capture thoughts.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
                     <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
                     <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
@@ -103,7 +105,7 @@ export default function LandingPage() {
                 title: "Buried Information",
                 description: "Notes and links get buried, never to be found again.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <circle cx="11" cy="11" r="7"></circle>
                     <path d="M20 20l-3-3"></path>
                   </svg>
@@ -113,7 +115,7 @@ export default function LandingPage() {
                 title: "Lost Insights",
                 description: "No easy way to connect or retrieve insights when you need them most.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <path d="M12 3v3"></path>
                     <path d="M12 18v3"></path>
                     <path d="M3 12h3"></path>
@@ -125,15 +127,17 @@ export default function LandingPage() {
             ].map((item, index) => (
               <motion.div 
                 key={index}
-                className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 transition-colors hover:bg-gray-50"
+                className="group relative overflow-hidden rounded-2xl border p-8 transition-all duration-300 shadow-teal hover:shadow-xl h-full"
+                style={{ borderColor: '#CBD5E1', backgroundColor: 'white' }}
+                whileHover={{ transform: 'translateY(-4px)', backgroundColor: '#F8FAFC' }}
                 variants={fadeInUp}
               >
-                <div className="mb-6 inline-flex items-center justify-center rounded-full border border-gray-300 bg-white p-3 shadow-sm">
+                <div className="mb-6 inline-flex items-center justify-center rounded-full border p-3 shadow-sm" style={{ borderColor: '#CBD5E1', backgroundColor: 'rgba(203, 213, 225, 0.1)' }}>
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                <div className="pointer-events-none absolute -right-6 -bottom-6 h-24 w-24 rounded-full border border-gray-200 opacity-60" />
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#001918' }}>{item.title}</h3>
+                <p className="leading-relaxed" style={{ color: '#6B7280' }}>{item.description}</p>
+                <div className="pointer-events-none absolute -right-6 -bottom-6 h-24 w-24 rounded-full border opacity-60" style={{ borderColor: '#CBD5E1' }} />
               </motion.div>
             ))}
           </motion.div>
@@ -141,7 +145,7 @@ export default function LandingPage() {
       </section>
 
       {/* Solution / Value Proposition */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 via-sky-50 to-indigo-50">
+      <section className="py-20 gradient-surface">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-14"
@@ -150,18 +154,18 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-1.5 text-xs font-medium text-blue-700 shadow-sm">
+            <div className="mx-auto inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium shadow-amber" style={{ borderColor: '#34D399', backgroundColor: 'rgba(52, 211, 153, 0.1)', color: '#34D399' }}>
               <span>SecondBrain</span>
             </div>
-            <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 mb-3">
+            <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight mb-3" style={{ color: '#001918' }}>
               One calm space for all your thoughts.
             </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: '#001918' }}>
               Second Brain organizes your notebooks, tags, and links — and lets you chat with them to uncover insights instantly.
             </p>
           </motion.div>
 
-          {/* Minimal monochrome benefits */}
+          {/* Beautiful benefits grid */}
           <motion.div 
             className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
             variants={staggerContainer}
@@ -174,7 +178,7 @@ export default function LandingPage() {
                 title: "Effortless Organization",
                 description: "Tag and group notes without friction.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <path d="M4 7h16"></path>
                     <path d="M6 12h12"></path>
                     <path d="M8 17h8"></path>
@@ -185,7 +189,7 @@ export default function LandingPage() {
                 title: "Conversational Search",
                 description: "Chat with your notebooks instead of scrolling endlessly.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
                   </svg>
                 )
@@ -194,7 +198,7 @@ export default function LandingPage() {
                 title: "All-in-One Storage",
                 description: "Save text, links, and inspirations in one place.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <rect x="3" y="7" width="18" height="13" rx="2"></rect>
                     <path d="M7 7V5a2 2 0 0 1 2-2h3l2 2h3a2 2 0 0 1 2 2"></path>
                   </svg>
@@ -204,7 +208,7 @@ export default function LandingPage() {
                 title: "Zen-like Interface",
                 description: "A distraction-free design that keeps you focused.",
                 icon: (
-                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: '#01322F' }}>
                     <circle cx="12" cy="12" r="9"></circle>
                     <path d="M8 15c1.333-1.333 2.667-2 4-2s2.667.667 4 2"></path>
                   </svg>
@@ -213,15 +217,17 @@ export default function LandingPage() {
             ].map((benefit, index) => (
               <motion.div 
                 key={index}
-                className="group relative rounded-2xl border border-blue-100 bg-white p-8 transition-all hover:-translate-y-0.5 hover:shadow-md shadow-sm"
+                className="group relative rounded-2xl border p-8 transition-all duration-300 shadow-teal hover:shadow-xl"
+                style={{ borderColor: '#CBD5E1', backgroundColor: 'white' }}
+                whileHover={{ transform: 'translateY(-4px)' }}
                 variants={fadeInUp}
               >
-                <div className="mb-6 inline-flex items-center justify-center rounded-full border border-blue-200 bg-white p-3 shadow-sm">
+                <div className="mb-6 inline-flex items-center justify-center rounded-full border p-3 shadow-sm" style={{ borderColor: '#CBD5E1', backgroundColor: 'rgba(203, 213, 225, 0.1)' }}>
                   {benefit.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
-                <div className="pointer-events-none absolute right-6 top-6 h-4 w-4 rounded-full border border-blue-200" />
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#001918' }}>{benefit.title}</h3>
+                <p className="leading-relaxed" style={{ color: '#6B7280' }}>{benefit.description}</p>
+                <div className="pointer-events-none absolute right-6 top-6 h-4 w-4 rounded-full border" style={{ borderColor: '#CBD5E1' }} />
               </motion.div>
             ))}
           </motion.div>
@@ -229,7 +235,7 @@ export default function LandingPage() {
       </section>
 
       {/* Social Proof */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-16"
@@ -238,13 +244,13 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#001918' }}>
               Loved by Knowledge Workers
             </h2>
           </motion.div>
           
           <motion.div 
-            className="grid md:grid-cols-3 gap-8 mb-16"
+            className="grid md:grid-cols-3 gap-8"
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -272,42 +278,28 @@ export default function LandingPage() {
             ].map((testimonial, index) => (
               <motion.div 
                 key={index}
-                className="bg-gray-50 p-6 rounded-2xl"
+                className="p-6 rounded-2xl shadow-teal"
+                style={{ backgroundColor: '#F1F5F9' }}
                 variants={fadeInUp}
               >
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold mr-4" style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}>
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">{testimonial.role}</div>
+                    <div className="font-semibold" style={{ color: '#001918' }}>{testimonial.name}</div>
+                    <div className="text-sm" style={{ color: '#6B7280' }}>{testimonial.role}</div>
                   </div>
                 </div>
-                <p className="text-gray-700 italic">"{testimonial.quote}"</p>
+                <p className="italic" style={{ color: '#001918' }}>"{testimonial.quote}"</p>
               </motion.div>
             ))}
-          </motion.div>
-          
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-sm text-gray-500 mb-6">Trusted by teams at</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              {["Google", "Microsoft", "Apple", "Netflix", "Spotify", "Airbnb"].map((company, index) => (
-                <div key={index} className="text-xl font-semibold text-gray-400">{company}</div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-20 gradient-surface">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-16"
@@ -316,10 +308,10 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#001918' }}>
               Choose Your Plan
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#001918' }}>
               Start free and upgrade as you grow. No hidden fees, cancel anytime.
             </p>
           </motion.div>
@@ -364,29 +356,33 @@ export default function LandingPage() {
             ].map((plan, index) => (
               <motion.div 
                 key={index}
-                className={`relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 ${
-                  plan.popular ? 'ring-2 ring-blue-500 scale-105' : ''
+                className={`relative p-8 rounded-2xl shadow-teal hover:shadow-xl transition-all duration-300 ${
+                  plan.popular ? 'scale-105' : ''
                 }`}
+                style={{ 
+                  backgroundColor: 'white',
+                  border: plan.popular ? '2px solid #34D399' : '1px solid #CBD5E1'
+                }}
                 variants={fadeInUp}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                    <span className="text-white px-4 py-1 rounded-full text-sm font-semibold" style={{ backgroundColor: '#34D399' }}>
                       Recommended
                     </span>
                   </div>
                 )}
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#001918' }}>{plan.name}</h3>
                   <div className="mb-2">
-                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                    <span className="text-gray-600 ml-2">{plan.period}</span>
+                    <span className="text-4xl font-bold" style={{ color: '#001918' }}>{plan.price}</span>
+                    <span className="ml-2" style={{ color: '#6B7280' }}>{plan.period}</span>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-600">
-                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <li key={featureIndex} className="flex items-center" style={{ color: '#6B7280' }}>
+                      <svg className="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ color: '#34D399' }}>
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       {feature}
@@ -394,11 +390,17 @@ export default function LandingPage() {
                   ))}
                 </ul>
                 <motion.button 
-                  className={`w-full py-3 px-6 rounded-xl font-semibold transition-colors duration-300 ${
+                  className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${
                     plan.popular 
-                      ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                      ? 'text-white shadow-teal' 
+                      : 'text-white shadow-teal'
                   }`}
+                  style={{ 
+                    background: plan.popular 
+                      ? 'linear-gradient(135deg, #01322F 0%, #012824 100%)' 
+                      : 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+                    color: plan.popular ? 'white' : '#001918'
+                  }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -410,52 +412,61 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
+      {/* Redesigned Dark Footer */}
+      <footer className="py-16" style={{ backgroundColor: '#001918' }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            {/* Brand Section */}
             <div>
-              <h3 className="text-xl font-bold mb-4">SecondBrain</h3>
-              <p className="text-gray-400 text-sm">
+              <h3 className="text-xl font-bold mb-3" style={{ color: 'white' }}>SecondBrain</h3>
+              <p className="text-sm mb-4" style={{ color: '#CBD5E1' }}>
                 Transform your thoughts into organized knowledge with AI-powered note-taking.
               </p>
+              <p className="text-xs" style={{ color: '#94A3B8' }}>
+                © 2024 SecondBrain™. All rights reserved.
+              </p>
             </div>
+
+            {/* Products Section */}
             <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
+              <h4 className="font-semibold mb-4" style={{ color: 'white' }}>Products</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Features</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Pricing</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>API</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Integrations</a></li>
               </ul>
             </div>
+
+            {/* Company Section */}
             <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
+              <h4 className="font-semibold mb-4" style={{ color: 'white' }}>Company</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>About</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Blog</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Careers</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Press</a></li>
               </ul>
             </div>
+
+            {/* Support Section */}
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Docs</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
+              <h4 className="font-semibold mb-4" style={{ color: 'white' }}>Support</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Help Center</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Docs</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Contact</a></li>
+                <li><a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#34D399'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Status</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-gray-400 mb-4 md:mb-0">
-              © 2024 SecondBrain. All rights reserved.
-            </div>
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+
+          {/* Bottom Section */}
+          <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center" style={{ borderColor: '#012824' }}>
+            <div className="flex space-x-6 text-sm">
+              <a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#F59E0B'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Privacy Policy</a>
+              <a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#F59E0B'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Terms of Service</a>
+              <a href="#" className="transition-colors" style={{ color: '#CBD5E1' }} onMouseEnter={(e) => e.target.style.color = '#F59E0B'} onMouseLeave={(e) => e.target.style.color = '#CBD5E1'}>Cookie Policy</a>
             </div>
           </div>
         </div>

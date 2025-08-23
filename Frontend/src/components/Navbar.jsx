@@ -27,7 +27,10 @@ function Avatar({ user, onLogout }) {
       <button
         aria-label="Open profile menu"
         onClick={toggleDropdown}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-900 text-white ring-1 ring-black/10 hover:bg-gray-800 transition-colors"
+        className="flex h-9 w-9 items-center justify-center rounded-full text-white ring-1 ring-black/10 transition-colors shadow-teal"
+        style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}
+        onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
       >
         {user?.avatar ? (
           <img
@@ -43,36 +46,40 @@ function Avatar({ user, onLogout }) {
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute right-0 top-11 z-50 w-56 rounded-xl border border-gray-200 bg-white/95 backdrop-blur shadow-xl">
+        <div className="absolute right-0 top-11 z-50 w-56 rounded-xl border backdrop-blur shadow-xl" style={{ borderColor: '#CBD5E1', backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
           <div className="py-2">
             <Link
-              to="/account"
-              className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50"
+              to="/profile"
+              className="block px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors"
+              style={{ color: '#001918' }}
               onClick={() => setIsDropdownOpen(false)}
             >
               My Account
             </Link>
             <Link
-              to="/notebooks"
-              className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50"
+              to="/settings"
+              className="block px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors"
+              style={{ color: '#001918' }}
               onClick={() => setIsDropdownOpen(false)}
             >
               My Notebooks
             </Link>
             <Link
-              to="/plan"
-              className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50"
+              to="/help"
+              className="block px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors"
+              style={{ color: '#001918' }}
               onClick={() => setIsDropdownOpen(false)}
             >
               My Plan
             </Link>
-            <div className="my-2 h-px bg-gray-100" />
+            <div className="my-2 h-px" style={{ backgroundColor: '#F3F4F6' }} />
             <button
               onClick={() => {
                 onLogout()
                 setIsDropdownOpen(false)
               }}
-              className="block w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50"
+              className="block w-full px-4 py-2.5 text-left text-sm hover:bg-red-50"
+              style={{ color: '#DC2626' }}
             >
               Sign Out
             </button>
@@ -89,15 +96,15 @@ export default function Navbar({ user, onLogout }) {
 
   const NavLinks = () => (
     <nav className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
-      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Explore</Link>
-      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Community</Link>
-      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">About</Link>
-      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 text-gray-700">Contact</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 transition-colors" style={{ color: '#001918' }}>Explore</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 transition-colors" style={{ color: '#001918' }}>Community</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 transition-colors" style={{ color: '#001918' }}>About</Link>
+      <Link to="/UnderDev" className="px-3 py-2 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-900 transition-colors" style={{ color: '#001918' }}>Contact</Link>
     </nav>
   )
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/20 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-40 border-b backdrop-blur supports-[backdrop-filter]:bg-white/60" style={{ borderColor: 'rgba(255, 255, 255, 0.2)', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo and Brand */}
@@ -105,7 +112,7 @@ export default function Navbar({ user, onLogout }) {
             <div className="h-8 w-8 rounded-lg  flex items-center justify-center ">
               <img src="sb_logo.png" alt="logo" className='h-8 w-8' />
             </div>
-            <span className="text-base md:text-lg font-semibold tracking-tight">SecondBrain</span>
+            <span className="text-base md:text-lg font-semibold tracking-tight" style={{ color: '#001918' }}>SecondBrain</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -119,10 +126,13 @@ export default function Navbar({ user, onLogout }) {
               <Avatar user={user} onLogout={onLogout} />
             ) : (
               <div className="hidden md:flex items-center gap-3">
-                <Link to="/login" className="text-gray-700 hover:text-gray-900">Login</Link>
+                <Link to="/login" className="hover:text-gray-900 transition-colors" style={{ color: '#001918' }}>Login</Link>
                 <Link
                   to="/signup"
-                  className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black/90 shadow-sm"
+                  className="rounded-md px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300"
+                  style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}
+                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                 >
                   Sign Up
                 </Link>
@@ -132,7 +142,8 @@ export default function Navbar({ user, onLogout }) {
             {/* Mobile menu button */}
             <button
               aria-label="Toggle menu"
-              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700"
+              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border bg-white"
+              style={{ borderColor: '#D1D5DB', color: '#1B1B1B' }}
               onClick={() => setMenuOpen((v) => !v)}
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -153,12 +164,12 @@ export default function Navbar({ user, onLogout }) {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden pb-4">
-            <div className="rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+            <div className="rounded-xl border p-3 shadow-sm" style={{ borderColor: '#E5E7EB', backgroundColor: 'white' }}>
               <NavLinks />
               {!user && (
                 <div className="mt-3 flex items-center gap-3">
-                  <Link to="/login" className="flex-1 text-center rounded-md border border-gray-300 py-2 text-gray-700">Login</Link>
-                  <Link to="/signup" className="flex-1 text-center rounded-md bg-gray-900 py-2 text-white">Sign Up</Link>
+                  <Link to="/login" className="flex-1 text-center rounded-md border py-2 transition-colors" style={{ borderColor: '#CBD5E1', color: '#001918' }}>Login</Link>
+                  <Link to="/signup" className="flex-1 text-center rounded-md py-2 text-white transition-all duration-300" style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}>Sign Up</Link>
                 </div>
               )}
             </div>

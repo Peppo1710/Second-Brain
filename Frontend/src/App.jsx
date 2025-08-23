@@ -21,7 +21,7 @@ import { div } from 'framer-motion/client'
 
 function Layout({ children, user, onLogout }) {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF', color: '#001918' }}>
 
       <Navbar user={user} onLogout={onLogout} />
       <main className=" ">{children}</main>
