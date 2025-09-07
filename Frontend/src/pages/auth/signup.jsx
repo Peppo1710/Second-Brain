@@ -1,30 +1,61 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { registerUser } from '../../utils/auth'
 
 export default function Signup({ onSignup }){
   const navigate = useNavigate()
   const [form, setForm] = useState({ username:'', firstname:'', lastname:'', age:'', phone:'', password:'' })
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   function update(key, value){
     setForm(prev => ({ ...prev, [key]: value }))
   }
 
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault()
+    setError('')
+    setLoading(true)
+    
     if ((form.password||'').length < 6){
       setError('Password must be at least 6 characters')
+      setLoading(false)
       return
     }
-    setError('')
-    const userData = {
-      id: 1,
-      name: `${form.firstname} ${form.lastname}`,
-      email: `${form.username}@example.com`,
-      avatar: null
+
+    if (!form.username || !form.firstname || !form.lastname || !form.password) {
+      setError('Please fill in all required fields')
+      setLoading(false)
+      return
     }
-    onSignup(userData)
-    navigate('/verify')
+
+    try {
+      const userData = {
+        username: form.username,
+        firstName: form.firstname,
+        lastName: form.lastname,
+        age: form.age ? parseInt(form.age) : null,
+        phone: form.phone || null,
+        password: form.password
+      }
+
+      const response = await registerUser(userData)
+      
+      if (response.success) {
+        const userInfo = {
+          id: response.user?.id || 1,
+          name: `${form.firstname} ${form.lastname}`,
+          email: response.user?.email || `${form.username}@example.com`,
+          avatar: response.user?.avatar || null
+        }
+        onSignup(userInfo)
+        navigate('/verify')
+      }
+    } catch (error) {
+      setError(error.message || 'Registration failed. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -219,11 +250,12 @@ export default function Signup({ onSignup }){
               )}
 
               <button 
-                className="w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300 transform hover:scale-105 shadow-teal" 
+                className="w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300 transform hover:scale-105 shadow-teal disabled:opacity-50 disabled:cursor-not-allowed" 
                 style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}
                 type="submit"
+                disabled={loading}
               >
-                Create account
+                {loading ? 'Creating account...' : 'Create account'}
               </button>
 
               <p className="text-xs text-center" style={{ color: '#6B7280' }}>

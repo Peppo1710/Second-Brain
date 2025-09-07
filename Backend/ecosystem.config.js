@@ -25,8 +25,14 @@ module.exports = {
     {
       name: "backend",
       script: "backend/server.js",
-      instances: 2,
-      exec_mode: "cluster"
+      instances: "max",
+      exec_mode: "cluster",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000
+      },
+      env_file: "backend/.env"  // <-- PM2 will load environment variables from .env
     }
   ]
 };
+

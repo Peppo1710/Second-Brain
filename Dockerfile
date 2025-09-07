@@ -1,8 +1,10 @@
 # Base image
 FROM node:18-bullseye
 
-# Install nginx
-RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+# Install nginx and supervisor
+RUN apt-get update && \
+    apt-get install -y nginx supervisor && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install PM2 globally
 RUN npm install -g pm2
@@ -17,11 +19,17 @@ RUN cd backend && npm install --production
 # Copy backend code
 COPY backend ./backend
 
+# Copy .env explicitly (optional if already inside backend)
+COPY backend/.env ./backend/.env
+
 # Copy Nginx config
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Copy supervisord config
+COPY supervisor/supervisord.conf /app/supervisor/supervisord.conf
 
 # Expose port 8080 for Railway
 EXPOSE 8080
 
-# Start Nginx + backend
-CMD service nginx start && pm2-runtime backend/ecosystem.config.js
+# Start both Nginx + Node using supervisord
+CMD ["/usr/bin/supervisord", "-c", "/app/supervisor/supervisord.conf"]

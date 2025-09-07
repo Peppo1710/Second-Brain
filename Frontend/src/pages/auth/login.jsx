@@ -1,22 +1,42 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../../utils/auth'
 
 export default function Login({ onLogin }){
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault()
-    if (username && password){
-      const userData = {
-        id: 1,
-        name: username,
-        email: `${username}@example.com`,
-        avatar: null
+    setError('')
+    setLoading(true)
+    
+    if (!username || !password) {
+      setError('Please fill in all fields')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await loginUser(username, password)
+      
+      if (response.success) {
+        const userData = {
+          id: response.user?.id || 1,
+          name: response.user?.name || username,
+          email: response.user?.email || `${username}@example.com`,
+          avatar: response.user?.avatar || null
+        }
+        onLogin(userData)
+        navigate('/home')
       }
-      onLogin(userData)
-      navigate('/home')
+    } catch (error) {
+      setError(error.message || 'Login failed. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -129,12 +149,19 @@ export default function Login({ onLogin }){
                 />
               </div>
 
+              {error && (
+                <div className="text-sm p-3 rounded-xl" style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', color: '#F59E0B' }}>
+                  {error}
+                </div>
+              )}
+
               <button 
-                className="w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300 transform hover:scale-105 shadow-teal" 
+                className="w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300 transform hover:scale-105 shadow-teal disabled:opacity-50 disabled:cursor-not-allowed" 
                 style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}
                 type="submit"
+                disabled={loading}
               >
-                Sign in
+                {loading ? 'Signing in...' : 'Sign in'}
               </button>
             </form>
           </div>

@@ -17,6 +17,7 @@ import Account from './pages/Account.jsx'
 import Plan from './pages/Plan.jsx'
 import Navbar from './components/Navbar.jsx'
 import UnderDevelopment from './utils/UnderDevelopment.jsx'
+import { verifySession, logoutUser, getCookie } from './utils/auth'
 import { div } from 'framer-motion/client'
 
 function Layout({ children, user, onLogout }) {
@@ -31,13 +32,38 @@ function Layout({ children, user, onLogout }) {
 
 function App() {
   const [user, setUser] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Check for existing user session on app load
   useEffect(() => {
-    const savedUser = localStorage.getItem('user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
+    const checkSession = async () => {
+      try {
+        // First check if there's a session token
+        const token = getCookie('session_token')
+        if (token) {
+          // Verify the session with the backend
+          const userData = await verifySession()
+          if (userData) {
+            setUser(userData)
+            localStorage.setItem('user', JSON.stringify(userData))
+          }
+        } else {
+          // Fallback to localStorage if no token
+          const savedUser = localStorage.getItem('user')
+          if (savedUser) {
+            setUser(JSON.parse(savedUser))
+          }
+        }
+      } catch (error) {
+        console.error('Session verification failed:', error)
+        // Clear any invalid session data
+        localStorage.removeItem('user')
+      } finally {
+        setIsLoading(false)
+      }
     }
+
+    checkSession()
   }, [])
 
   const handleLogin = (userData) => {
@@ -46,8 +72,21 @@ function App() {
   }
 
   const handleLogout = () => {
+    logoutUser() // This will clear the session cookie
     setUser(null)
     localStorage.removeItem('user')
+  }
+
+  // Show loading spinner while checking session
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-gray-300 border-t-teal-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p style={{ color: '#6B7280' }}>Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
