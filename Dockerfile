@@ -16,6 +16,10 @@ WORKDIR /app
 COPY backend/package*.json ./backend/
 RUN cd backend && npm install --production
 
+# Debugging 
+RUN ls -R /app
+
+
 # Copy backend code
 COPY backend ./backend
 
