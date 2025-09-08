@@ -31,7 +31,11 @@ module.exports = {
         NODE_ENV: "production",
         PORT: 3000
       },
-      env_file: "backend/.env"  // <-- PM2 will load environment variables from .env
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000
+      }
+      // env_file: "backend/.env"  // <-- PM2 will load environment variables from .env
     }
   ]
 };
