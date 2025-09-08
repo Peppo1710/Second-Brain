@@ -19,8 +19,8 @@ RUN cd backend && npm install --production
 # Copy backend code
 COPY backend ./backend
 
-# Copy .env explicitly (optional if already inside backend)
-COPY backend/.env ./backend/.env
+# # Copy .env explicitly (optional if already inside backend)
+# COPY backend/.env ./backend/.env
 
 # Copy Nginx config
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
