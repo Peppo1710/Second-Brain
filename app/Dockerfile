@@ -5,7 +5,7 @@ FROM node:18-bullseye
 RUN echo "=== CHECKING BUILD CONTEXT ==="
 COPY . /tmp/debug
 RUN ls -la /tmp/debug
-RUN ls -la /tmp/debug/backend || echo "NO BACKEND FOLDER FOUND"
+RUN ls -la /tmp/debug/../backend || echo "NO BACKEND FOLDER FOUND"
 
 # Install nginx and supervisor
 RUN apt-get update && \
@@ -18,26 +18,21 @@ RUN npm install -g pm2
 # Set workdir
 WORKDIR /app
 
-# Copy backend dependencies first (for caching)
-COPY backend/package*.json ./backend/
+# Copy backend dependencies first (for caching) - go up one level
+COPY ../backend/package*.json ./backend/
 RUN cd backend && npm install --production
 
 # Debugging 
 RUN ls -la /app && ls -la /
 
+# Copy backend code - go up one level
+COPY ../backend/ ./backend/
 
+# Copy Nginx config - go up one level  
+COPY ../nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Copy backend code
-COPY backend/ ./backend/
-
-# # Copy .env explicitly (optional if already inside backend)
-# COPY backend/.env ./backend/.env
-
-# Copy Nginx config
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
-
-# Copy supervisord config
-COPY supervisor/supervisord.conf /app/supervisor/supervisord.conf
+# Copy supervisord config - go up one level
+COPY ../supervisor/supervisord.conf /app/supervisor/supervisord.conf
 
 # Expose port 8080 for Railway
 EXPOSE 8080
