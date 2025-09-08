@@ -1,6 +1,12 @@
 # Base image
 FROM node:18-bullseye
 
+# Debug: Show what files Railway can see
+RUN echo "=== CHECKING BUILD CONTEXT ==="
+COPY . /tmp/debug
+RUN ls -la /tmp/debug
+RUN ls -la /tmp/debug/backend || echo "NO BACKEND FOLDER FOUND"
+
 # Install nginx and supervisor
 RUN apt-get update && \
     apt-get install -y nginx supervisor && \
