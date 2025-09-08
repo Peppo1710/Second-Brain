@@ -22,7 +22,7 @@ RUN ls -la /app && ls -la /
 
 
 # Copy backend code
-COPY backend ./backend
+COPY backend/ ./backend/
 
 # # Copy .env explicitly (optional if already inside backend)
 # COPY backend/.env ./backend/.env
