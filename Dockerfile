@@ -17,7 +17,8 @@ COPY backend/package*.json ./backend/
 RUN cd backend && npm install --production
 
 # Debugging 
-RUN ls -R /app
+RUN ls -la /app && ls -la /
+
 
 
 # Copy backend code
