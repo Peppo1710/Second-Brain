@@ -16,10 +16,10 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
       {/* Hero Section */}
       <section
-        className="relative overflow-hidden py-12 lg:py-20 bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)] "
+        className="relative overflow-hidden py-12 lg:py-20"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between">
@@ -66,7 +66,7 @@ export default function LandingPage() {
       </section>
   
       {/* Problem Statement */}
-      <section className="py-20 bg-white dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -147,7 +147,7 @@ export default function LandingPage() {
       </section>
   
       {/* Solution / Value Proposition */}
-      <section className="py-20 bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-14"
@@ -236,7 +236,7 @@ export default function LandingPage() {
       </section>
   
       {/* Social Proof */}
-      <section className="py-20 bg-white dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -302,7 +302,7 @@ export default function LandingPage() {
       </section>
   
       {/* Pricing Section */}
-      <section className="py-20 bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -400,7 +400,7 @@ export default function LandingPage() {
       </section>
   
       {/* Redesigned Dark Footer */}
-      <footer className="py-16 bg-[#001918] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <footer className="py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             {/* Brand Section */}
