@@ -433,7 +433,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a href="#" className="text-[#CBD5E1] hover:text-[#34D399] transition-colors dark:text-slate-400 dark:hover:text-emerald-400">
-                    Integrations
+                    Integrations 
                   </a>
                 </li>
               </ul>
