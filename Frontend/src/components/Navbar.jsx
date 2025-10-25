@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toggleTheme } from '../utils/theme'
+import { Sun, Moon } from "lucide-react";
+
 
 // Avatar component similar to shadcn/ui
 function Avatar({ user, onLogout }) {
@@ -93,6 +96,17 @@ function Avatar({ user, onLogout }) {
 export default function Navbar({ user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const handleToggle = () => {
+    toggleTheme();
+    setIsDark(document.documentElement.classList.contains("dark"));
+  };
+
 
   const NavLinks = () => (
     <nav className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
@@ -121,18 +135,42 @@ export default function Navbar({ user, onLogout }) {
           </div>
 
           {/* Right side */}
+          {/* Right side */}
           <div className="flex items-center gap-3">
+            {/* Dark mode toggle */}
+            <button
+              onClick={handleToggle}
+              aria-label="Toggle dark mode"
+              className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-gray-300 
+               bg-white hover:bg-gray-100 transition-colors 
+               dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              {isDark ? (
+                // show Sun when currently dark (action = go light)
+                <Sun className="h-5 w-5 text-gray-500 group-hover:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100" />
+              ) : (
+                // show Moon when currently light (action = go dark)
+                <Moon className="h-5 w-5 text-gray-600 group-hover:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100" />
+              )}
+            </button>
+
             {user ? (
               <Avatar user={user} onLogout={onLogout} />
             ) : (
               <div className="hidden md:flex items-center gap-3">
-                <Link to="/login" className="hover:text-gray-900 transition-colors" style={{ color: '#001918' }}>Login</Link>
+                <Link
+                  to="/login"
+                  className="hover:text-gray-900 transition-colors"
+                  style={{ color: "#001918" }}
+                >
+                  Login
+                </Link>
                 <Link
                   to="/signup"
                   className="rounded-md px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300"
-                  style={{ background: 'linear-gradient(135deg, #01322F 0%, #012824 100%)' }}
-                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                  style={{ background: "linear-gradient(135deg, #01322F 0%, #012824 100%)" }}
+                  onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
+                  onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
                 >
                   Sign Up
                 </Link>
@@ -143,7 +181,7 @@ export default function Navbar({ user, onLogout }) {
             <button
               aria-label="Toggle menu"
               className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border bg-white"
-              style={{ borderColor: '#D1D5DB', color: '#1B1B1B' }}
+              style={{ borderColor: "#D1D5DB", color: "#1B1B1B" }}
               onClick={() => setMenuOpen((v) => !v)}
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -159,6 +197,7 @@ export default function Navbar({ user, onLogout }) {
               </svg>
             </button>
           </div>
+
         </div>
 
         {/* Mobile Menu */}

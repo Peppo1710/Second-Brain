@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* optional: nicer theme transitions + UA hint */
+html { color-scheme: light dark; }
+* { transition: background-color 150ms, color 150ms, border-color 150ms; }
+
 /* Custom font - Andada Pro */
 @font-face {
   font-family: 'AndadaPro';
