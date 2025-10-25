@@ -22,10 +22,9 @@ import { div } from 'framer-motion/client'
 
 function Layout({ children, user, onLogout }) {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF', color: '#001918' }}>
-
+    <div className="min-h-screen bg-white text-gray-900 dark:bg-slate-950 dark:text-slate-100">
       <Navbar user={user} onLogout={onLogout} />
-      <main className=" ">{children}</main>
+      <main className="">{children}</main>
     </div>
   )
 }
@@ -80,10 +79,10 @@ function App() {
   // Show loading spinner while checking session
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-950">
         <div className="text-center">
-          <div className="w-8 h-8 border-4 border-gray-300 border-t-teal-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p style={{ color: '#6B7280' }}>Loading...</p>
+          <div className="w-8 h-8 border-4 border-gray-300 border-t-teal-600 rounded-full animate-spin mx-auto mb-4 dark:border-slate-700 dark:border-t-emerald-500"></div>
+          <p className="text-gray-600 dark:text-slate-400">Loading...</p>
         </div>
       </div>
     )
