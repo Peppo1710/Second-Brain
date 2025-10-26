@@ -109,6 +109,19 @@ html.dark body {
   background: linear-gradient(135deg, #01322F 0%, #012824 100%);
 }
 
+html.dark .gandu{
+  background: linear-gradient(135deg,#000000 0%,#111111 100%);
+}
+
+.gandu:nth-child(odd){
+  background:linear-gradient(135deg,#ffffff 0%,#CBD5E1 100%);
+
+}
+.gandu:nth-child(even){
+  background:red;
+
+}
+
 .gradient-accent {
   background: linear-gradient(135deg, #F59E0B 0%, #34D399 100%);
 }

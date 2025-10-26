@@ -16,10 +16,10 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full gandu dark:dark-mode ">
       {/* Hero Section */}
       <section
-        className="relative overflow-hidden py-12 lg:py-20 bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)] "
+        className="relative overflow-hidden py-12 lg:py-20   "
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between">
@@ -41,14 +41,15 @@ export default function LandingPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-16">
                 <motion.button
-                  className="px-8 py-4 rounded-xl text-lg font-semibold text-white transition-all duration-300 shadow-teal hover:shadow-xl transform hover:-translate-y-1 bg-gradient-to-br from-[#01322F] to-[#012824] dark:shadow-none dark:hover:brightness-110"
+                  className="px-8 py-4 rounded-xl text-lg font-semibold text-white transition-all duration-300 shadow-teal hover:shadow-xl transform hover:-translate-y-1 bg-gradient-to-br from-[#01322F] to-[#012824] dark:shadow-none dark:hover:brightness-110 dark:bg-none dark:bg-[#7ae0a5] dark:text-white"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Get Started
                 </motion.button>
                 <motion.button
-                  className="border-2 border-[#01322F] px-8 py-4 rounded-xl text-lg font-semibold text-[#01322F] bg-white/80 transition-all duration-300 shadow-teal dark:shadow-none dark:border-slate-600 dark:text-slate-200 dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]/80"
+                  className="border-2 border-[#01322F] px-8 py-4 rounded-xl text-lg font-semibold text-[#01322F] bg-white/80 transition-all duration-300 shadow-teal dark:shadow-none dark:border-slate-600 dark:text-black dark:bg-[#FAF9F6]
+"
                   whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 1)' }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -66,7 +67,7 @@ export default function LandingPage() {
       </section>
   
       {/* Problem Statement */}
-      <section className="py-20 bg-white dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20 ">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -130,8 +131,8 @@ export default function LandingPage() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="group relative overflow-hidden rounded-2xl border border-[#CBD5E1] bg-white p-8 transition-all duration-300 shadow-teal hover:shadow-xl h-full dark:shadow-none dark:border-slate-700 dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]"
-                whileHover={{ transform: 'translateY(-4px)', backgroundColor: '#F8FAFC' }}
+                className="group relative overflow-hidden rounded-2xl border border-[#CBD5E1] bg-white p-8 transition-all duration-300 shadow-teal hover:shadow-xl h-full dark:shadow-none dark:border-slate-700 dark:bg-transparent "
+                whileHover={{ transform: 'translateY(-4px)' }}
                 variants={fadeInUp}
               >
                 <div className="mb-6 inline-flex items-center justify-center rounded-full border border-[#CBD5E1] bg-[#CBD5E1]/10 p-3 shadow-sm dark:shadow-none dark:border-slate-700 dark:bg-slate-800/50">
@@ -147,7 +148,7 @@ export default function LandingPage() {
       </section>
   
       {/* Solution / Value Proposition */}
-      <section className="py-20 bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20  ">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-14"
@@ -219,7 +220,7 @@ export default function LandingPage() {
             ].map((benefit, index) => (
               <motion.div
                 key={index}
-                className="group relative rounded-2xl border border-[#CBD5E1] bg-white p-8 transition-all duration-300 shadow-teal hover:shadow-xl dark:shadow-none dark:border-slate-700 dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]"
+                className="group relative rounded-2xl border border-[#CBD5E1] bg-white p-8 transition-all duration-300 shadow-teal hover:shadow-xl dark:shadow-none dark:border-slate-700 dark:bg-transparent "
                 whileHover={{ transform: 'translateY(-4px)' }}
                 variants={fadeInUp}
               >
@@ -236,7 +237,7 @@ export default function LandingPage() {
       </section>
   
       {/* Social Proof */}
-      <section className="py-20 bg-white dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20 ">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -282,7 +283,7 @@ export default function LandingPage() {
             ].map((testimonial, index) => (
               <motion.div
                 key={index}
-                className="p-6 rounded-2xl border border-[#CBD5E1] dark:border-slate-700 bg-[#F1F5F9] shadow-teal dark:shadow-none dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]"
+                className="p-6 rounded-2xl border border-[#CBD5E1] dark:border-slate-700 bg-[#F1F5F9] shadow-teal dark:shadow-none  dark:bg-transparent"
                 variants={fadeInUp}
               >
                 <div className="flex items-center mb-4">
@@ -302,7 +303,7 @@ export default function LandingPage() {
       </section>
   
       {/* Pricing Section */}
-      <section className="py-20 bg-[linear-gradient(135deg,#ffffff_0%,#CBD5E1_100%)] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <section className="py-20  ">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -351,7 +352,7 @@ export default function LandingPage() {
             ].map((plan, index) => (
               <motion.div
                 key={index}
-                className={`relative p-8 rounded-2xl bg-white shadow-teal hover:shadow-xl transition-all duration-300 dark:shadow-none dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)] ${
+                className={`relative p-8 rounded-2xl bg-white shadow-teal hover:shadow-xl transition-all duration-300 dark:shadow-none dark:bg-transparent  ${
                   plan.popular ? 'scale-105 border-2 border-[#34D399]' : 'border border-[#CBD5E1]'
                 }`}
                 variants={fadeInUp}
@@ -385,8 +386,8 @@ export default function LandingPage() {
                 <motion.button
                   className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 dark:shadow-none ${
                     plan.popular
-                      ? 'text-white shadow-teal bg-gradient-to-br from-[#01322F] to-[#012824] dark:hover:brightness-110'
-                      : 'text-[#001918] shadow-teal bg-gradient-to-br from-[#CBD5E1] to-[#94A3B8] dark:hover:brightness-110'
+                      ? 'text-white  bg-[#069e8f] dark:hover:brightness-110'
+                      : 'text-white bg-[#02645a] dark:text-white dark:hover:brightness-110'
                   }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -400,7 +401,7 @@ export default function LandingPage() {
       </section>
   
       {/* Redesigned Dark Footer */}
-      <footer className="py-16 bg-[#001918] dark:bg-[linear-gradient(135deg,#000000_0%,#111111_100%)]">
+      <footer className="py-16 bg-[#001918] dark:bg-[#00000078]">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             {/* Brand Section */}
