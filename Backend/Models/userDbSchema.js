@@ -1,16 +1,32 @@
 const mongoose = require('mongoose');
 
+// const mongoose = require('mongoose');
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true }, // email
   firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  lastName:  { type: String, required: true },
   age: Number,
   phone: String,
   isVerified: { type: Boolean, default: false },
-  password: { type: String, required: true },
+
+  provider: { 
+    type: String, 
+    enum: ['local', 'google'], 
+    default: 'local' 
+  },
+
+  // required only for local users; allow null for google users
+  password: { 
+    type: String, 
+    required: function () { return this.provider === 'local'; },
+    default: null
+  },
+
   loginAttempts: { type: Number, default: 0 },
-  lockUntil: { type: Date, default: null }, // lock expires at this time
+  lockUntil: { type: Date, default: null },
 }, { timestamps: true });
+
 
 const verificationTokenSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },

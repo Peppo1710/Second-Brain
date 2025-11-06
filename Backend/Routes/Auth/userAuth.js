@@ -20,11 +20,13 @@ userAuth.post('/register', async (req, res) => {
     // Check if user exists
     const existingUser = await User.findOne({ username: data.username });
 
-    if (existingUser.isVerfied===false) {
-      return res.status(400).json({ error: "User already exists but not verified" });
-    }
-    if (existingUser.isVerfied===true) {
-      return res.status(400).json({ error: "User already exists , login" });
+    if (existingUser) {
+      if (!existingUser.isVerified) {
+        return res.status(400).json({ error: "User already exists but not verified" });
+      }
+      if (existingUser.isVerified) {
+        return res.status(400).json({ error: "User already exists, login" });
+      }
     }
 
     // Hash password
@@ -34,7 +36,9 @@ userAuth.post('/register', async (req, res) => {
     const newUser = new User({
       ...data,
       password: hashedPassword,
-      isVerfied:false,
+      isVerified: false,
+      provider: 'local',
+      
     });
 
     await newUser.save();
@@ -150,8 +154,8 @@ userAuth.post('/login', async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "Invalid username or password" });
     }
-    if (user.isVerfied===false) {
-      return res.status(400).json({ error: "Not verified" });
+    if (!user.isVerified) {
+      return res.status(400).json({ error: "Please verify your email before logging in" });
     }
 
     // Check cooldown lock
@@ -204,7 +208,6 @@ userAuth.post('/login', async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 
 
 userAuth.get('/me', authMiddleware, async (req, res) => {
