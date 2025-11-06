@@ -19,8 +19,12 @@ userAuth.post('/register', async (req, res) => {
 
     // Check if user exists
     const existingUser = await User.findOne({ username: data.username });
-    if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+
+    if (existingUser.isVerfied===false) {
+      return res.status(400).json({ error: "User already exists but not verified" });
+    }
+    if (existingUser.isVerfied===true) {
+      return res.status(400).json({ error: "User already exists , login" });
     }
 
     // Hash password
@@ -146,6 +150,9 @@ userAuth.post('/login', async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "Invalid username or password" });
     }
+    if (user.isVerfied===false) {
+      return res.status(400).json({ error: "Not verified" });
+    }
 
     // Check cooldown lock
     if (user.lockUntil && user.lockUntil > new Date()) {
@@ -199,18 +206,6 @@ userAuth.post('/login', async (req, res) => {
 });
 
 
-// function authMiddleware(req, res, next) {
-//   const token = req.headers.authorization?.split(" ")[1];
-//   if (!token) return res.status(401).json({ error: "Unauthorized" });
-
-//   try {
-//     const decoded = jwt.verify(token, JWT_SECRET);
-//     req.userId = decoded.id;
-//     next();
-//   } catch (err) {
-//     return res.status(403).json({ error: "Invalid token" });
-//   }
-// }
 
 userAuth.get('/me', authMiddleware, async (req, res) => {
   try {
