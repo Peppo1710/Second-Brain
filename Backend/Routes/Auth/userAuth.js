@@ -23,9 +23,13 @@ userAuth.post('/register', async (req, res) => {
     if (existingUser) {
       if (!existingUser.isVerified) {
         return res.status(400).json({ error: "User already exists but not verified" });
+        // Make them send the email again if the old email is not verified . let frontend give them option to get to this page
       }
-      if (existingUser.isVerified) {
-        return res.status(400).json({ error: "User already exists, login" });
+      if (existingUser.isVerified && existingUser.provider=='local') {
+        return res.status(400).json({ error: "User already exists, please try to login" });
+      }
+      if (existingUser.isVerified && existingUser.provider=='google') {
+        return res.status(400).json({ error: "User already exists, please try to login with google" });
       }
     }
 

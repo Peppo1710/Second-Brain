@@ -30,6 +30,10 @@ async (accessToken, refreshToken, profile, done) => {
       await User.deleteOne({ _id: existingUser._id });
       existingUser = null;
     }
+    if (existingUser && existingUser.provider === 'local' && existingUser.isVerified) {
+      return done(null, false, { message: "Account exists, login via email" });
+      
+    }
 
     if (!existingUser) {
       const newUser = new User({
