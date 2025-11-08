@@ -2,7 +2,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const Razorpay = require("razorpay");
-const authMiddleware = require("../middleware/authMiddleware");
+const authMiddleware = require("../../middleware/userMiddleware");
 
 dotenv.config();
 
@@ -34,9 +34,12 @@ router.post("/create-order", authMiddleware, async (req, res) => {
     const options = {
       amount: PLANS[plan].amountInPaise, // paise
       currency: "INR",
-      receipt: `rcpt_${userId}_${Date.now()}`,
+      receipt: `rcpt_${Date.now()}`,
       notes: { userId, plan },
+
+      
     };
+    
 
     const order = await razorpay.orders.create(options);
 
