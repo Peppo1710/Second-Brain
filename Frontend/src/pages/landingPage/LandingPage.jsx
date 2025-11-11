@@ -237,7 +237,7 @@ export default function LandingPage() {
       </section>
   
       {/* Social Proof */}
-      <section className="py-20 ">
+      {/* <section className="py-20 ">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -300,7 +300,7 @@ export default function LandingPage() {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
   
       {/* Pricing Section */}
       <section className="py-20  ">

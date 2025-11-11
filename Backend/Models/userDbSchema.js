@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-// const mongoose = require('mongoose');
-
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true }, // email
   firstName: { type: String, required: true },
@@ -15,6 +13,7 @@ const userSchema = new mongoose.Schema({
     enum: ['local', 'google'], 
     default: 'local' 
   },
+  plan: { type: String, enum: ["free", "pro"], default: "free" },
 
   // required only for local users; allow null for google users
   password: { 
@@ -22,7 +21,6 @@ const userSchema = new mongoose.Schema({
     required: function () { return this.provider === 'local'; },
     default: null
   },
-
   loginAttempts: { type: Number, default: 0 },
   lockUntil: { type: Date, default: null },
 }, { timestamps: true });
@@ -39,4 +37,4 @@ const verificationTokenSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const VerificationToken = mongoose.model('VerificationToken', verificationTokenSchema);
 
-module.exports ={ User , VerificationToken};
+module.exports ={User, VerificationToken};

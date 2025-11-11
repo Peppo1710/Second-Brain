@@ -1,7 +1,7 @@
 const express = require('express');
 const divRouter = express.Router();
 const mongoose = require('mongoose');
-const { Division, Notebook } = require('../../Models/notebookSchema');
+const { Division, Notebook } = require('../../models/notebookSchema');
 const authMiddleware = require('../../middleware/userMiddleware');
 
 // ---------------- Helpers ----------------

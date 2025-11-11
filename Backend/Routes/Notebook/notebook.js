@@ -1,7 +1,7 @@
 // routes/notebooks.js
 const express = require('express');
 const notebookRouter = express.Router();
-const {Notebook} = require('../../Models/notebookSchema');
+const {Notebook} = require('../../models/notebookSchema');
 // const { requireAuth } = require('../middlewares/auth');
 const mongoose = require('mongoose');
 const authMiddleware = require('../../middleware/userMiddleware')
